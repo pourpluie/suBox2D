@@ -53,10 +53,10 @@ void Sandbox::setContactFilter( const b2ContactFilter &filter )
 
 void Sandbox::debugDraw( float points_per_meter )
 {
-	gl::pushModelView();
+	gl::pushModelMatrix();
 	gl::scale( points_per_meter, points_per_meter );
   mWorld.DrawDebugData();
-  gl::popModelView();
+  gl::popModelMatrix();
 }
 
 unique_body_ptr Sandbox::createBody(const b2BodyDef &body_def, const b2FixtureDef &fixture_def)
@@ -148,7 +148,7 @@ unique_body_ptr Sandbox::createFanShape(const ci::Vec2f &pos, const std::vector<
   return createBody( bodyDef, fixtures );
 }
 
-unique_body_ptr Sandbox::createShape( const ci::Vec2f &centroid, const ci::TriMesh2d &mesh, float scale )
+unique_body_ptr Sandbox::createShape( const ci::Vec2f &centroid, const ci::TriMesh &mesh, float scale )
 {
   const auto num_triangles = mesh.getNumTriangles();
   vector<b2PolygonShape> shapes( num_triangles );
